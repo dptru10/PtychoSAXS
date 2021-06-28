@@ -54,3 +54,5 @@ for i in range(0,nframes):
     rframes[i] = frames[i]
     print('before frame * probe %d' %i)
     frames[i] = np.abs(np.fft.fftshift(np.fft.fft2(probe*frames[i])))**2
+
+np.save('frames.npy',frames,allow_pickle=True)
