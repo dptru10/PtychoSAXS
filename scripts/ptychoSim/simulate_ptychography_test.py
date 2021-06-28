@@ -12,9 +12,12 @@ from scipy import misc
 from os    import path
 from PIL import Image
 
-image = Image.open("test.tiff") 
+image = Image.open("test.tif") 
 image = np.asarray(image)
 size  = image.shape[0]
+
+probe = np.load('probe.npy',allow_pickle=True) 
+
 
 scan_side = size # Scan side in frames
 nframes   = scan_side**2
@@ -29,17 +32,17 @@ end_y = scan_side
 translation = np.column_stack((X[start_y:end_y,start_x:end_x].flatten(),Y[start_y:end_y,start_x:end_x].flatten(),np.zeros(Y[start_y:end_y,start_x:end_x].size)))
 
 
-step_size  = 1 # Scan step size in m
-pixel_step = 1 # Step size in pixels
+step_size  = 1    # Scan step size in m
+pixel_step = 1    # Step size in pixels
 det_side   = size # Detector side in pixels
 
-obj_side = size#det_side+(scan_side-1)*pixel_step
+obj_side = size
 
 # Generate the probe
 [X,Y] = np.meshgrid(np.arange(-3,3,6./det_side),np.arange(-3,3,6./det_side))
 R = np.sqrt(X**2+Y**2)
+
 # Use a relatively tight constraint
-probe_mask = R < 0.3
 probe = np.complex128(probe_mask)
 probe *= np.random.random(probe.shape)
 probe = np.fft.fftshift(np.fft.fft2(probe))
