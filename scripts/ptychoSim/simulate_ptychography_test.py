@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 
 import numpy as np
-import h5py
 import os,sys
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
-import scipy.misc 
 import scipy 
-from scipy import misc 
-from os    import path
+from os import path
 from PIL import Image
 import torch 
 
 
 probe = np.load('probe.npy',allow_pickle=True) 
-probe = np.resize(probe,size) 
 size  = image.shape
 
 image = Image.open("test.tif") 
