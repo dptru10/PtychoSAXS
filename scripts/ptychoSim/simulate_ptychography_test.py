@@ -2,7 +2,6 @@
 
 import numpy as np
 import h5py
-#import Image 
 import os,sys
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
@@ -11,13 +10,16 @@ import scipy
 from scipy import misc 
 from os    import path
 from PIL import Image
+import torch 
+
+
+probe = np.load('probe.npy',allow_pickle=True) 
+probe = np.resize(probe,size) 
+size  = image.shape
 
 image = Image.open("test.tif") 
 image = np.asarray(image)
-size  = image.shape[0]
-
-probe = np.load('probe.npy',allow_pickle=True) 
-
+image = np.resize(image,size)
 
 scan_side = size # Scan side in frames
 nframes   = scan_side**2
