@@ -9,7 +9,7 @@ import torch
 
 
 probe = np.load('probe.npy',allow_pickle=True) 
-size  = image.shape
+size  = probe.shape
 
 image = Image.open("test.tif") 
 image = np.asarray(image)
