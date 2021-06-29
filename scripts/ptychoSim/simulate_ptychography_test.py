@@ -9,9 +9,9 @@ import torch
 
 
 probe = np.load('probe.npy',allow_pickle=True) 
-size  = probe.shape
+size  = probe.shape[0]
 
-image = Image.open("test.tif") 
+image = Image.open("persian_motif.jpg") 
 image = np.asarray(image)
 image = np.resize(image,size)
 
@@ -38,10 +38,11 @@ obj_side = size
 [X,Y] = np.meshgrid(np.arange(-3,3,6./det_side),np.arange(-3,3,6./det_side))
 R = np.sqrt(X**2+Y**2)
 
+pixel_translation = translation * pixel_step
 # Use a relatively tight constraint
-probe = np.complex128(probe_mask)
-probe *= np.random.random(probe.shape)
-probe = np.fft.fftshift(np.fft.fft2(probe))
+#probe = np.complex128(probe_mask)
+#probe *= np.random.random(probe.shape)
+#probe = np.fft.fftshift(np.fft.fft2(probe))
 
 frames = np.empty((nframes,det_side,det_side))
 
