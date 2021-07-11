@@ -47,9 +47,8 @@ pixel_translation = translation * pixel_step
 frames = np.empty((nframes,det_side,det_side))
 
 for i in range(0,nframes):
-    frames[i] = image[pixel_translation[i,1]:pixel_translation[i,1]+det_side,pixel_translation[i,0]:pixel_translation[i,0]+det_side]
-    rframes[i] = frames[i]
-    print('before frame * probe %d' %i)
-    frames[i] = np.abs(np.fft.fftshift(np.fft.fft2(probe*frames[i])))**2
+    object = image[pixel_translation[i,1]:pixel_translation[i,1]+det_side,pixel_translation[i,0]:pixel_translation[i,0]+det_side]
+    frames.append(np.abs(np.fft.fftshift(np.fft.fft2(probe*object)))**2)
+frames = np.array(frames)
 
 np.save('frames.npy',frames,allow_pickle=True)
